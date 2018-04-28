@@ -3,9 +3,20 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Video;
 
 class VideoController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +24,7 @@ class VideoController extends Controller
      */
     public function index()
     {
-        return "VideoController@index";
+        return view('video.index');
     }
 
     /**
@@ -23,7 +34,7 @@ class VideoController extends Controller
      */
     public function create()
     {
-        //
+        return view('video.create');
     }
 
     /**
@@ -34,7 +45,26 @@ class VideoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'video' => 'mimetypes:video/mp4,video/avi,video/mpeg,video/quicktime,video/x-flv',
+        ]);
+
+        $path = $request->file('video')->store('/', 'uploads');
+
+        $id = pathinfo($path, PATHINFO_FILENAME);
+        $title = $request->file('video')->getClientOriginalName();
+        $owner = $request->user()->id;
+
+        Video::create([
+            'id' => $id,
+            'title' => $title,
+            'user_id' => $owner
+        ]);
+
+        // Do job here
+
+        return redirect(action('VideosController@index'))
+                   ->with('status', 'Successfully uploaded the video!');
     }
 
     /**
