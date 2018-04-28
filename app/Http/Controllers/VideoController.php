@@ -63,7 +63,7 @@ class VideoController extends Controller
 
         // Do job here
 
-        return redirect(action('VideosController@index'))
+        return redirect(action('VideoController@index'))
                    ->with('status', 'Successfully uploaded the video!');
     }
 
