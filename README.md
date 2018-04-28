@@ -5,7 +5,7 @@ Shadow
 
 Generate unique string ID for new user:
 
-str_random();
+`str_random();`
 
 then get APP_KEY from `.env` file:
 
