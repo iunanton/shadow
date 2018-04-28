@@ -21,7 +21,9 @@ class RegisterController extends Controller
     |
     */
 
-    use RegistersUsers;
+    use RegistersUsers {
+        showRegistrationForm as traitShowRegistrationForm;
+    }
 
     /**
      * Where to redirect users after registration.
@@ -41,6 +43,22 @@ class RegisterController extends Controller
     }
 
     /**
+     * Show the application registration form.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showRegistrationForm()
+    {
+        if (request()->hasValidSignature() && $id = request()->id) {
+            if (User::where('id', $id)->doesntExist()) {
+                return $this->traitShowRegistrationForm()->with('id', $id);
+            }
+        }
+
+        return abort(404);
+    }
+
+    /**
      * Get a validator for an incoming registration request.
      *
      * @param  array  $data
@@ -49,6 +67,7 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
+            'id' => 'required|string|max:16',
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
@@ -64,6 +83,7 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         return User::create([
+            'id' => $data['id'],
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
