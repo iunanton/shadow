@@ -46,7 +46,5 @@ class ProcessVideo implements ShouldQueue
         if (!$process->isSuccessful()) {
                 throw new ProcessFailedException($process);
         }
-
-        Storage::disk('uploads')->delete($this->path);
     }
 }
