@@ -47,7 +47,7 @@ class VideoController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'video' => 'mimetypes:video/mp4,video/avi,video/mpeg,video/quicktime,video/x-flv',
+            'video' => 'required|mimetypes:video/mp4,video/avi,video/mpeg,video/quicktime,video/x-flv',
         ]);
 
         $path = $request->file('video')->store('/', 'uploads');

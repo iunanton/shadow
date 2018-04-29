@@ -27,7 +27,7 @@
                         <div class="form-group row">
                             <label for="video" class="col-sm-4 col-form-label text-md-right">Please choose a file to upload</label>
                             <div class="col-md-6">
-                                <input id="video" type="file" class="" name="video"><br>
+                                <input id="video" type="file" class="" name="video" value="{{ old('video') }}" required><br>
                             </div>
                         </div>
                         <div class="form-group row mb-0">
