@@ -17,6 +17,8 @@ class CreateVideosTable extends Migration
             $table->string('id')->unique();
             $table->string('title');
             $table->string('user_id');
+            $table->unsignedInteger('status')
+                 ->default(0);
             $table->unsignedInteger('max_quality')
                  ->default(0);
             $table->timestamps();

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Video;
+use App\Jobs\ProcessVideo;
 
 class VideoController extends Controller
 {
@@ -61,7 +62,7 @@ class VideoController extends Controller
             'user_id' => $owner
         ]);
 
-        // Do job here
+        ProcessVideo::dispatch($path);
 
         return redirect(action('VideoController@index'))
                    ->with('status', 'Successfully uploaded the video!');
