@@ -53,7 +53,8 @@ class VideoController extends Controller
         $path = $request->file('video')->store('/', 'uploads');
 
         $id = pathinfo($path, PATHINFO_FILENAME);
-        $title = $request->file('video')->getClientOriginalName();
+        $name = $request->file('video')->getClientOriginalName();
+        $title = pathinfo($name, PATHINFO_FILENAME);
         $owner = $request->user()->id;
 
         Video::create([
