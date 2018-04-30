@@ -2,8 +2,8 @@
 
 @section('content')
 <div class="container">
-    @unless($videos->count())
-        {{ __('No entries yet') }}
+    @if ($videos->isEmpty())
+        <p>{{ __('No entries yet') }}</p>
     @else
         <table class="table">
             <thead>
@@ -16,13 +16,13 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($videos as $video)
+                @foreach ($videos as $video)
                     <tr>
                         <td>{{ $video->id }}</td>
                         <td>{{ $video->title }}</td>
                         <td>{{ $video->user_id }}</td>
                         <td>
-                            @switch($video->status)
+                            @switch ($video->status)
                                 @case(0)
                                     <span class="badge badge-primary">Pending</span>
                                     @break
@@ -52,7 +52,7 @@
                 @endforeach
             </tbody>
         </table>
-    @endunless
+    @endif
     {{ $videos->links() }}
 </div>
 @endsection
