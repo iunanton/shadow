@@ -7,8 +7,6 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use Illuminate\Support\Facades\Storage;
-use Symfony\Component\Process\Process;
 
 class ProcessVideo implements ShouldQueue
 {
@@ -47,11 +45,6 @@ class ProcessVideo implements ShouldQueue
      */
     public function handle()
     {
-        $process = new Process("process-v {$this->path}");
-        $process->run();
-
-        if (!$process->isSuccessful()) {
-                throw new ProcessFailedException($process);
-        }
+        exec("process-v {$this->path}");
     }
 }
