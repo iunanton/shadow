@@ -21,5 +21,4 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('/video', 'VideoController');
 
-Route::get('/videos/{video}/{file}', 'VideoController@getAsset')
-    ->where('file', '(.*)');
+Route::get('/video/{video}/{file}', 'VideoController@getAsset');
