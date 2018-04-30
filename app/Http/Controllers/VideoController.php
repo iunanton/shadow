@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use App\Video;
 use App\Jobs\ProcessVideo;
 
@@ -77,12 +78,20 @@ class VideoController extends Controller
      */
     public function show(Video $video)
     {
-        return view('video.show')->with('video', $video);
+        if (Gate::allows('view-video', $video)) {
+            return view('video.show')->with('video', $video);
+        } else {
+            return abort(404);
+        }
     }
 
     public function getAsset(Video $video, $file)
     {
-        return response()->file(storage_path("app/videos/$video->id/$file"))->setPrivate();
+        if (Gate::allows('view-video', $video)) {
+            return response()->file(storage_path("app/videos/$video->id/$file"))->setPrivate();
+        } else {
+            abort(404);
+        }
     }
 
     /**

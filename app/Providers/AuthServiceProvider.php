@@ -14,7 +14,6 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         'App\Model' => 'App\Policies\ModelPolicy',
-        'App\Video' => 'App\Policies\VideoPolicy',
     ];
 
     /**
@@ -26,6 +25,8 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        Gate::define('view-video', function ($user, $video) {
+            return $user->id == $video->user_id;
+        });
     }
 }
