@@ -5,7 +5,8 @@
     @if ($videos->isEmpty())
         <p>{{ __('No entries yet') }}</p>
     @else
-        <table class="table">
+    <div class="table-responsive">
+        <table class="table table-laravel">
             <thead>
                 <tr>
                     <th>ID</th>
@@ -13,6 +14,8 @@
                     <th>User ID</th>
                     <th>Status</th>
                     <th>Max quality</th>
+                    <th>Created at</th>
+                    <th>Updated at</th>
                 </tr>
             </thead>
             <tbody>
@@ -48,10 +51,13 @@
                             @endswitch
                         </td>
                         <td>{{ $video->max_quality }}</td>
+                        <td>{{ $video->created_at }}</td>
+                        <td>{{ $video->updated_at }}</td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
+    </div>
     @endif
     {{ $videos->links() }}
 </div>
