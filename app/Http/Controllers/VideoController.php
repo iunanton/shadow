@@ -26,7 +26,8 @@ class VideoController extends Controller
      */
     public function index()
     {
-        return view('video.index');
+        $videos = Video::whereIn('status', array(2,3))->paginate(15);
+        return view('video.index')->with('videos', $videos);
     }
 
     /**
