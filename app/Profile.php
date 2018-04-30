@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Video extends Model
+class Profile extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -12,10 +12,8 @@ class Video extends Model
      * @var array
      */
     protected $fillable = [
-        'id', 'title', 'user_id', 'max_quality',
+        'dateOfBirth', 'displayDOB', 'height', 'weigth', 'description',
     ];
-
-    public $incrementing = false;
 
     /**
      * Get the user.
