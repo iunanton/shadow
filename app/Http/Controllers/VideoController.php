@@ -77,7 +77,7 @@ class VideoController extends Controller
      */
     public function show($id)
     {
-        return view('video.show');
+        return view('video.show')->with('video', $video);
     }
 
     /**

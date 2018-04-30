@@ -7,8 +7,6 @@
 
 require('./bootstrap');
 
-window.HELP_IMPROVE_VIDEOJS = false;
-
 require('videojs-ie8');
 
 videojs = require('video.js');
@@ -33,12 +31,12 @@ const app = new Vue({
 var player = videojs('video', {
    controls: true,
    //fluid: true,
-   poster: "/poster.jpg"
+   poster: window.poster
 });
 
 player.ready(function() {
     this.src({
-        src: "/manifest.mpd",
+        src: window.source,
         type: 'application/dash+xml'
     });
     this.hotkeys({

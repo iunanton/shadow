@@ -11,6 +11,11 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
+    <script type="text/javascript">
+        window.HELP_IMPROVE_VIDEOJS = false;
+        window.poster = "{{ '/videos/' . $video->id . '/poster.jpg' }}";
+        window.source = "{{ url('/videos/' . $video->id . '/manifest.mpd') }}";
+    </script>
     <script src="{{ asset('js/player.js') }}" defer></script>
 
     <!-- Fonts -->
