@@ -28,4 +28,9 @@ class User extends Authenticatable
     ];
 
     public $incrementing = false;
+
+    public function isSuperAdmin()
+    {
+        return in_array($this->id, ['Ciuc7Hwfaiqum02w']);
+    }
 }
