@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use App\Video;
 use App\Jobs\ProcessVideo;
 
@@ -83,8 +82,7 @@ class VideoController extends Controller
 
     public function getAsset(Video $video, $file)
     {
-        //return response()->file(storage_path("app/videos/$video->id/$file"))->setPrivate();
-        return Storage::disk('videos')->file("$video->id/$file")->setPrivate();
+        return response()->file(storage_path("app/videos/$video->id/$file"))->setPrivate();
     }
 
     /**
