@@ -24,7 +24,7 @@ class ProcessVideo implements ShouldQueue
      *
      * @var int
      */
-    public $timeout = 14400;
+    public $timeout = 32400;
 
     protected $path;
 
