@@ -22,7 +22,7 @@
                 @foreach ($videos as $video)
                     <tr>
                         <td title="{{ $video->id }}">{{ str_limit($video->id, 8) }}</td>
-                        <td title="{{ $video->title }}">{{ str_limit($video->title, 32) }}</td>
+                        <td title="{{ $video->title }}">{{ str_limit($video->title, 48) }}</td>
                         <td title="{{ $video->user_id }}">{{ str_limit($video->user_id, 8) }}</td>
                         <td>
                             @switch ($video->status)
