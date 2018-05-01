@@ -26,7 +26,7 @@ class VideoController extends Controller
      */
     public function index()
     {
-        $videos = Video::whereIn('status', array(2,3))->orderBy('created_at', 'desc')->paginate(15);
+        $videos = Video::whereIn('status', array(2,3))->paginate(15);
         return view('video.index')->with('videos', $videos);
     }
 
