@@ -15,6 +15,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/terms', function () {
+    return response('<h1>Terms of Service</h1>');
+});
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

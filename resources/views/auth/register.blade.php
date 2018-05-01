@@ -77,6 +77,20 @@
                             </div>
                         </div>
 
+                        <div class="form-group row">
+                            <div class="col-md-6 offset-md-4">
+                                <input id="defaultCheck1" type="checkbox" required>
+                                <label class="form-check-label" for="defaultCheck1">I confirm I am 18 years of age or older</a></label>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-md-6 offset-md-4">
+                                <input id="defaultCheck1" type="checkbox" required>
+                                <label class="form-check-label" for="defaultCheck1">I agree to the <a href="{{ url('/terms') }}">terms of service</a></label>
+                            </div>
+                        </div>
+
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
