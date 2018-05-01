@@ -29,6 +29,6 @@ Route::get('/video/{video}/{file}', 'VideoController@getAsset')
     ->where('file', '(.*)');
 
 Route::get('/stats', function () {
-    $videos = App\Video::paginate(15);
+    $videos = App\Video::orderBy('created_at', 'desc')->paginate(15);
     return view('stats')->with('videos', $videos);
 });
