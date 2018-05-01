@@ -5,7 +5,7 @@
     @if ($videos->isEmpty())
         <p>{{ __('No entries yet') }}</p>
     @else
-    <div class="table-responsive">
+    <div class="table-responsive mb-4">
         <table class="table table-laravel">
             <thead>
                 <tr>
@@ -59,6 +59,9 @@
         </table>
     </div>
     @endif
-    {{ $videos->links() }}
+    <!--Pagination-->
+    <nav aria-label="pagination">
+        {{ $videos->links() }}
+    </nav>
 </div>
 @endsection
