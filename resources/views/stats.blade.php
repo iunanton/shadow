@@ -13,7 +13,7 @@
                     <th>Title</th>
                     <th>User ID</th>
                     <th>Status</th>
-                    <th>Max quality</th>
+                    <th>Quality</th>
                     <th>Created at</th>
                     <th>Updated at</th>
                 </tr>
@@ -21,9 +21,9 @@
             <tbody>
                 @foreach ($videos as $video)
                     <tr>
-                        <td>{{ $video->id }}</td>
-                        <td>{{ $video->title }}</td>
-                        <td>{{ $video->user_id }}</td>
+                        <td title="{{ $video->id }}">{{ str_limit($video->id, 8) }}</td>
+                        <td title="{{ $video->title }}">{{ str_limit($video->title, 32) }}</td>
+                        <td title="{{ $video->user_id }}">{{ str_limit($video->user_id, 8) }}</td>
                         <td>
                             @switch ($video->status)
                                 @case(0)
