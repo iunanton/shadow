@@ -2,7 +2,6 @@
 
 @section('content')
 <div class="container text-center">
-    <h1>VideoController&commat;index</h1>
     @if (session('status'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             {{ session('status') }}
