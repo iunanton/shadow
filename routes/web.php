@@ -23,6 +23,11 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/user', function () {
+    $videos = App\User::first()->videos->take(6);
+    return view('user')->with('videos', $videos);
+});
+
 Route::resource('/video', 'VideoController');
 
 Route::get('/video/{video}/{file}', 'VideoController@getAsset')

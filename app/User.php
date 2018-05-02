@@ -33,4 +33,9 @@ class User extends Authenticatable
     {
         return in_array($this->id, ['Ciuc7Hwfaiqum02w']);
     }
+
+    public function videos()
+    {
+        return $this->hasMany('App\Video');
+    }
 }
