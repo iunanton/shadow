@@ -31,7 +31,7 @@
             <h6 class="card-title">Public videos</h6>
             <div class="row">
                 @foreach ($videos as $video)
-                <a class="col-md-2" href="{{ url('/video/' . $video->id) }}"><img class="img-fluid" src="{{ url('/video/' . $video->id . '/poster.jpg') }}" alt="poster"></a>
+                <a class="col-md-2" href="{{ url('/video/' . $video->id) }}"><img class="img-fluid poster" src="{{ url('/video/' . $video->id . '/poster.jpg') }}" alt="poster"></a>
                 @endforeach
             </div>
         </div>
