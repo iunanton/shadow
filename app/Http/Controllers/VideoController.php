@@ -19,6 +19,12 @@ class VideoController extends Controller
         $this->middleware('auth');
     }
 
+    protected function getRandom($count = 1)
+    {
+        $videos = Video::whereIn('status', array(2,3))->random($count);
+
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -80,7 +86,7 @@ class VideoController extends Controller
     public function show(Video $video)
     {
         if (Gate::allows('view-video', $video)) {
-            return view('video.show')->with('video', $video);
+            return view('video.show')->with('video', $video)->with('videos', Video::whereIn('status', array(2,3))->get()->random(6));
         } else {
             return abort(404);
         }

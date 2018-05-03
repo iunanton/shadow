@@ -7,9 +7,28 @@
             {{ session('status') }}
         </div>
     @endif
-    <video id="video" class="video-js vjs-16-9 vjs-big-play-centered mb-3"></video>
-    <div>
-        <h2>{{ $video->title }}</h2>
+    <div class="row">
+        <div class="col-lg-8">
+            <video id="video" class="video-js vjs-16-9 vjs-big-play-centered mb-3"></video>
+            <div>
+                <h2>{{ $video->title }}</h2>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            @foreach ($videos as $item)
+            <div class="row">
+                <div class="col-6">
+                    <a href="{{ url('/video/' . $item->id) }}">
+                        <img class="img-fluid poster" src="{{ asset('/video/' . $item->id . '/poster.jpg') }}" alt="image">
+                    </a>
+                </div>
+                <div class="col-6">
+                    <h5><a class="text-dark" href="{{ url('/video/' . $item->id) }}">{{ $item->title }}</a></h5>
+                    <p><small class="text-muted">{{ $item->user->name }}</small></p>
+                </div>
+            </div>
+            @endforeach
+        </div>
     </div>
 </div>
 @endsection
