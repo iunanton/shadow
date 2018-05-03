@@ -16,12 +16,12 @@
     <div class="card-columns">
         @foreach ($videos as $item)
             <div class="card">
-                <a href="{{ url('/video/' . $item->id) }}">
+                <a href="{{ action('VideoController@show', $item->id) }}">
                     <img class="card-img-top poster" src="{{ asset('/video/' . $item->id . '/poster.jpg') }}" alt="Poster">
                 </a>
                 <div class="card-body">
                     <h5 class="card-title">
-                        <a class="text-dark" href="{{ url('/video/' . $item->id) }}">{{ $item->title }}</a>
+                        <a class="text-dark" href="{{ action('VideoController@show', $item->id) }}">{{ $item->title }}</a>
                     </h5>
                     <p class="card-text"><small class="text-muted">{{ $item->user->name }}</small></p>
                 </div>

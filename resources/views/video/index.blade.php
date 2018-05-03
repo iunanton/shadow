@@ -13,7 +13,11 @@
     @forelse ($videos as $video)
         <div class="card mb-3">
             <div class="card-body row">
-                <div class="col-md-4"><img class="img-fluid poster" src="{{ asset('/video/'.$video->id.'/poster.jpg') }}" alt="poster"></div>
+                <div class="col-md-4">
+                    <a href="{{ action('VideoController@show', $video->id) }}">
+                        <img class="img-fluid poster" src="{{ asset('/video/'.$video->id.'/poster.jpg') }}" alt="poster">
+                    </a>
+                </div>
                 <div class="col-md-8">
                     <div class="row">
                         <div class="col-12 text-muted"><strong>Public access</strong></div>
