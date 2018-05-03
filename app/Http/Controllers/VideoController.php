@@ -34,7 +34,7 @@ class VideoController extends Controller
     public function index()
     {
         $videos = Video::where('user_id', Auth::user()->id)->orderBy('created_at', 'desc')->paginate(10);
-        return view('videos')->with('videos', $videos);
+        return view('video.index')->with('videos', $videos);
     }
 
     /**
