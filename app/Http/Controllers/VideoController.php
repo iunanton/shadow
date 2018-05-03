@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use App\Video;
 use App\Jobs\ProcessVideo;
@@ -32,8 +33,8 @@ class VideoController extends Controller
      */
     public function index()
     {
-        $videos = Video::whereIn('status', array(2,3))->paginate(15);
-        return view('video.index')->with('videos', $videos);
+        $videos = Video::where('user_id', Auth::user()->id)->orderBy('created_at', 'desc')->paginate(10);
+        return view('videos')->with('videos', $videos);
     }
 
     /**
