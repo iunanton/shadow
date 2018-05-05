@@ -35,12 +35,12 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-lg-3 col-sm-4 text-muted">Title:</div>
-                        <div class="col-lg-9 col-sm-8">{{ $video->title }}</div>
+                        <div class="col-sm-3 text-muted">Title:</div>
+                        <div class="col-sm-9">{{ $video->title }}</div>
                     </div>
                     <div class="row">
-                        <div class="col-lg-3 col-sm-4 text-muted">Status:</div>
-                        <div class="col-lg-9 col-sm-8">
+                        <div class="col-sm-3 text-muted">Status:</div>
+                        <div class="col-sm-9">
                             @switch ($video->status)
                                 @case(0)
                                     <span class="badge badge-primary">Pending</span>
@@ -68,16 +68,16 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-lg-3 col-sm-4 text-muted">Quality:</div>
-                        <div class="col-lg-9 col-sm-8">{{ $video->max_quality }}</div>
+                        <div class="col-sm-3 text-muted">Quality:</div>
+                        <div class="col-sm-9">{{ $video->max_quality }}</div>
                     </div>
                     <div class="row">
-                        <div class="col-lg-3 col-sm-4 text-muted">Created at:</div>
-                        <div class="col-lg-9 col-sm-8">{{ $video->created_at }}</div>
+                        <div class="col-sm-3 text-muted">Created at:</div>
+                        <div class="col-sm-9">{{ $video->created_at }}</div>
                     </div>
                     <div class="row">
-                        <div class="col-lg-3 col-sm-4 text-muted">Updated at:</div>
-                        <div class="col-lg-9 col-sm-8">{{ $video->updated_at }}</div>
+                        <div class="col-sm-3 text-muted">Updated at:</div>
+                        <div class="col-sm-9">{{ $video->updated_at }}</div>
                     </div>
                     <a href="{{ action('VideoController@edit', $video->id) }}" class="btn btn-primary mt-2">Edit</a>
                     <a href="{{ action('VideoController@destroy', $video->id) }}" class="btn btn-secondary mt-2">Delete</a>
