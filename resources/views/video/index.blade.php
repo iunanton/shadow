@@ -26,7 +26,13 @@
                 </div>
                 <div class="col-md-8">
                     <div class="row">
-                        <div class="col-12 text-muted"><strong>Public access</strong></div>
+                        <div class="col-12 text-muted">
+                            @if ($video->public)
+                                <strong>Public access</strong>
+                            @else
+                                <strong>Private access</strong>
+                            @endif
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-3 col-sm-4 text-muted">Title:</div>

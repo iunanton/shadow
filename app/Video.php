@@ -12,7 +12,7 @@ class Video extends Model
      * @var array
      */
     protected $fillable = [
-        'id', 'title', 'user_id', 'max_quality',
+        'id', 'title', 'public', 'user_id', 'max_quality',
     ];
 
     public $incrementing = false;
