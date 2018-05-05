@@ -12,6 +12,12 @@
             <video id="video" class="video-js vjs-16-9 vjs-big-play-centered mb-3"></video>
             <div>
                 <h2>{{ $video->title }}</h2>
+                @if ($video->user_id == Auth::user()->id)
+                    <div>
+                        <a class="btn btn-primary" href="{{ action('VideoController@edit', $video->id) }}">Edit</a>
+                        <a class="btn btn-secondary" href="{{ action('VideoController@destroy', $video->id) }}">Delete</a>
+                    </div>
+                @endif
             </div>
         </div>
         <div class="col-lg-4">
