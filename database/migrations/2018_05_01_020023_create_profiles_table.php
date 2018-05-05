@@ -15,12 +15,12 @@ class CreateProfilesTable extends Migration
     {
         Schema::create('profiles', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('user_id'),
-            $table->date('dateOfBirth'),
-            $table->boolean('displayDOB')->default(false),
-            $table->unsignedInteger('height')->nullable(),
-            $table->unsignedInteger('weigth')->nullable(),
-            $table->text('description')->nullable(),
+            $table->string('user_id');
+            $table->date('dateOfBirth');
+            $table->boolean('displayDOB')->default(false);
+            $table->unsignedInteger('height')->nullable();
+            $table->unsignedInteger('weigth')->nullable();
+            $table->text('description')->nullable();
             $table->timestamps();
             $table->foreign('user_id')
                 ->references('id')

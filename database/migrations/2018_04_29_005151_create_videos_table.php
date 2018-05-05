@@ -16,6 +16,7 @@ class CreateVideosTable extends Migration
         Schema::create('videos', function (Blueprint $table) {
             $table->string('id')->unique();
             $table->string('title');
+            $table->boolean('public')->default(false);
             $table->string('user_id');
             $table->unsignedInteger('status')
                  ->default(0);
