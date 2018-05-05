@@ -33,6 +33,10 @@ Route::resource('/video', 'VideoController');
 Route::get('/video/{video}/{file}', 'VideoController@getAsset')
     ->where('file', '(.*)');
 
+Route::get('/audio', function () {
+    return view('audio');
+});
+
 Route::get('/stats', function () {
     $videos = App\Video::orderBy('created_at', 'desc')->paginate(10);
     return view('stats')->with('videos', $videos);
