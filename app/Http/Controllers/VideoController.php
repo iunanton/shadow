@@ -20,10 +20,19 @@ class VideoController extends Controller
         $this->middleware('auth');
     }
 
+    protected function getPublic()
+    {
+        return Video::where('public', 1)->whereIn('status', [2, 3])->get();
+    }
+
     protected function getRandom($count = 1)
     {
-        $videos = Video::whereIn('status', array(2,3))->random($count);
-
+        $videos = $this->getPublic();
+        $availebleCount = $videos->count();
+        if ($availebleCount < $count)
+            return $this->getPublic()->random($availebleCount);
+        else
+            return $this->getPublic()->random($count);
     }
 
     /**
@@ -33,7 +42,8 @@ class VideoController extends Controller
      */
     public function index()
     {
-        $videos = Video::where('user_id', Auth::user()->id)->orderBy('created_at', 'desc')->paginate(10);
+        $userId = Auth::user()->id;
+        $videos = Video::where('user_id', $userId)->orderBy('created_at', 'desc')->paginate(10);
         return view('video.index')->with('videos', $videos);
     }
 
@@ -87,7 +97,7 @@ class VideoController extends Controller
     public function show(Video $video)
     {
         if (Gate::allows('view-video', $video)) {
-            return view('video.show')->with('video', $video)->with('videos', Video::whereIn('status', array(2,3))->get()->random(6));
+            return view('video.show')->with('video', $video)->with('videos', $this->getRandom(6));
         } else {
             return abort(404);
         }

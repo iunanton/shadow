@@ -24,7 +24,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $videos = Video::where('public', 1)->whereIn('status', array(2,3))
+        $videos = Video::where('public', 1)->whereIn('status', [2, 3])
             ->paginate(15);
         return view('home')->with('videos', $videos);
     }
