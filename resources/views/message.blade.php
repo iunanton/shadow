@@ -8,9 +8,11 @@
                 <div class="card-body">
                     <video id="feedback"></video>
                     <div>
-                        <button id="record" class="btn btn-danger">Record</button>
-                        <button id="stop" class="btn btn-secondary">Stop</button>
-                        <button id="submit" class="btn btn-secondary">Submit</button>
+                        <button id="button-record" class="btn btn-danger">Record</button>
+                        <button id="button-pause" class="btn btn-danger" style="display: none;">Pause</button>
+                        <button id="button-resume" class="btn btn-danger" style="display: none;">Resume</button>
+                        <button id="button-stop" class="btn btn-secondary" disabled>Stop</button>
+                        <button id="button-submit" class="btn btn-secondary" disabled>Submit</button>
                     </div>
                 </div>
             </div>
@@ -21,6 +23,7 @@
 (function(){
 
 var constraints = { video: true, audio: true };
+var localStream;
 var chunks = [];
 
 if (navigator.mediaDevices === undefined) {
@@ -41,6 +44,7 @@ if (navigator.mediaDevices.getUserMedia === undefined) {
 	
 navigator.mediaDevices.getUserMedia(constraints)
 .then(function(stream) {
+    localStream = stream;
     if ("srcObject" in feedback) {
         feedback.srcObject = stream;
     } else {
@@ -50,33 +54,64 @@ navigator.mediaDevices.getUserMedia(constraints)
         feedback.play();
     };
 
+    var buttonRecord = document.getElementById('button-record');
+    var buttonPause = document.getElementById('button-pause');
+    var buttonResume = document.getElementById('button-resume');
+    var buttonStop = document.getElementById('button-stop');
+    var buttonSubmit = document.getElementById('button-submit');
+
     var mediaRecorder = new MediaRecorder(stream);
 
-    record.onclick = function() {
+    buttonRecord.onclick = function() {
         mediaRecorder.start();
         console.log(mediaRecorder.state);
         console.log("recorder started");
-        this.innerHTML = "Stop";
-        this.onclick = function() {
-            mediaRecorder.stop();
-            console.log(mediaRecorder.state);
-            console.log("recorder stopped");
-        }
+        this.style.display = "none";
+        buttonPause.style.display = "inline-block";
+        buttonStop.disabled = false;
+    }
+
+    buttonPause.onclick = function() {
+        mediaRecorder.pause();
+        console.log(mediaRecorder.state);
+        console.log("recorder paused");
+        this.style.display = "none";
+        buttonResume.style.display = "inline-block";
+    }
+
+    buttonResume.onclick = function() {
+        mediaRecorder.resume();
+        console.log(mediaRecorder.state);
+        console.log("recorder resumed");
+        this.style.display = "none";
+        buttonPause.style.display = "inline-block";
+    }
+
+    buttonStop.onclick = function() {
+        mediaRecorder.stop();
+        console.log(mediaRecorder.state);
+        console.log("recorder stopped");
+        buttonPause.disabled = true;
+        buttonResume.disabled = true;
     }
 
     mediaRecorder.onstop = function(e) {
         console.log("data available after MediaRecorder.stop() called.");
+        localStream.getTracks().forEach(function (track) {
+            track.stop();
+        });
         var blob = new Blob(chunks, { 'type' : 'video/mp4' });
         chunks = [];
 
         if ("srcObject" in feedback) {
-            feedback.srcObject = blob;
+            feedback.srcObject = null;
         } else {
-            feedback.src = window.URL.createObjectURL(blob);
+            feedback.src = null;
         }
 
         feedback.controls = true;
         feedback.onloadedmetadata = null;
+        feedback.src = window.URL.createObjectURL(blob);
 
       console.log("recorder stopped");
     }
