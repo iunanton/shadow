@@ -1,4 +1,4 @@
-@extends('layouts.player')
+@extends('layouts.app')
 
 @section('content')
 <div class="container">
@@ -9,7 +9,7 @@
     @endif
     <div class="row">
         <div class="col-lg-8">
-            <video id="video" class="video-js vjs-16-9 vjs-big-play-centered mb-3"></video>
+            <video-player manifest="{{ url('/video/' . $video->id . '/manifest.mpd') }}" poster="{{ url('/video/' . $video->id . '/poster.jpg') }}"></video-player>
             <div>
                 <h2>{{ $video->title }}</h2>
                 @if ($video->user_id == Auth::user()->id)

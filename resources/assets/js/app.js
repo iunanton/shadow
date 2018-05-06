@@ -7,6 +7,13 @@
 
 require('./bootstrap');
 
+require('videojs-ie8');
+
+videojs = require('video.js');
+require('dashjs');
+require('videojs-contrib-dash');
+require('videojs-hotkeys');
+
 window.Vue = require('vue');
 
 /**
@@ -16,6 +23,7 @@ window.Vue = require('vue');
  */
 
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
+Vue.component('video-player', require('./components/VideoPlayer.vue'));
 
 const app = new Vue({
     el: '#app'
