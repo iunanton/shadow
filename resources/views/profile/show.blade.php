@@ -7,7 +7,7 @@
             <div class="text-center mb-4">
                 <img class="img-fluid" src="{{ asset('/images/default.png') }}" alt="photo">
             </div>
-            <h3 class="mb-4">杜建军</h3>
+            <h3 class="mb-4">{{ $profile->user->name }}</h3>
             <a href="#" class="btn btn-block btn-primary mb-4"><strong>Say "Hi!" to him</strong></a>
         </div>
         <div class="col-md-9">
@@ -20,15 +20,19 @@
                         <h5>Basic</h5>
                         <ul class="list-inline">
                             <li class="list-inline-item">Age: 28</li>
-                            <li class="list-inline-item">Height: 180</li>
-                            <li class="list-inline-item">Weigth: 70</li>
+                            <li class="list-inline-item">Height: {{ $profile->height }}</li>
+                            <li class="list-inline-item">Weight: {{ $profile->weight }}</li>
                             <li class="list-inline-item">BMI: 20</li>
                         </ul>
                     </div>
                     <hr>
                     <div class="card-text">
                         <h5>Description</h5>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus id sapien eu augue tincidunt auctor consequat ac diam. In sit amet quam nunc. Proin quis tellus dapibus, pulvinar mi et, interdum dolor. Maecenas finibus volutpat ex quis condimentum. Quisque interdum felis purus, id lobortis ligula interdum nec. Morbi et massa sollicitudin, commodo dolor eget, rhoncus leo. Quisque tempus sagittis fringilla.</p>
+                        @empty ($profile->description)
+                        <p>Not specified yet.</p>
+                        @else
+                        <p>{{ $profile->description }}</p>
+                        @endempty
                     </div>
                 </div>
             </div>
@@ -38,11 +42,11 @@
                 </div>
                 <div class="card-body">
                     @if ($publicVideos->isEmpty())
-                        {{ __('No public video yet') }}
+                        {{ __('No public video yet.') }}
                     @else
                     <div class="row">
                         @foreach ($publicVideos as $video)
-                        <a class="col-md-3 mb-3" href="{{ url('/video/' . $video->id) }}"><img class="img-fluid poster" src="{{ url('/video/' . $video->id . '/poster.jpg') }}" alt="poster"></a>
+                        <a class="col-md-3 mb-3" href="{{ url('/video/' . $video->id) }}"><img class="img-fluid poster" src="{{ asset('/video/' . $video->id . '/poster.jpg') }}" alt="poster"></a>
                         @endforeach
                     </div>
                     @endif

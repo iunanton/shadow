@@ -16,6 +16,16 @@ class Profile extends Model
     ];
 
     /**
+     * Get the route key for the model.
+     *
+     * @return string
+     */
+    public function getRouteKeyName()
+    {
+        return 'user_id';
+    }
+
+    /**
      * Get the user.
      */
     public function user()
