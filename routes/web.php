@@ -24,8 +24,10 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/user', function () {
-    $videos = App\User::first()->videos;
-    return view('user')->with('videos', $videos);
+    //$videos = App\User::first()->videos;
+    $publicVideos = App\User::first()->videos()->where('public', true)->get();
+    $privateVideos = App\User::first()->videos()->where('public', false)->get();
+    return view('user')->with('publicVideos', $publicVideos)->with('privateVideos', $privateVideos);
 });
 
 Route::resource('/video', 'VideoController');

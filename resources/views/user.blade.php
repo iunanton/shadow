@@ -36,11 +36,31 @@
                     {{ __('Public videos') }}
                 </div>
                 <div class="card-body">
+                    @if ($publicVideos->isEmpty())
+                        {{ __('No public video yet') }}
+                    @else
                     <div class="row">
-                        @foreach ($videos as $video)
+                        @foreach ($publicVideos as $video)
                         <a class="col-md-3 mb-3" href="{{ url('/video/' . $video->id) }}"><img class="img-fluid poster" src="{{ url('/video/' . $video->id . '/poster.jpg') }}" alt="poster"></a>
                         @endforeach
                     </div>
+                    @endif
+                </div>
+            </div>
+            <div class="card mb-3">
+                <div class="card-header">
+                    {{ __('Private videos') }}
+                </div>
+                <div class="card-body">
+                    @if ($privateVideos->isEmpty())
+                        {{ __('No private video yet') }}
+                    @else
+                    <div class="row">
+                        @foreach ($privateVideos as $video)
+                        <a class="col-md-3 mb-3" href="{{ url('/video/' . $video->id) }}"><img class="img-fluid poster" src="{{ url('/video/' . $video->id . '/poster.jpg') }}" alt="poster"></a>
+                        @endforeach
+                    </div>
+                    @endif
                 </div>
             </div>
         </div>
