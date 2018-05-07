@@ -24,7 +24,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/user', function () {
-    $videos = App\User::first()->videos->take(6);
+    $videos = App\User::first()->videos;
     return view('user')->with('videos', $videos);
 });
 
