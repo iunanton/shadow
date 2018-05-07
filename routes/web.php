@@ -37,9 +37,7 @@ Route::get('/audio', function () {
     return view('audio');
 });
 
-Route::get('/message', function () {
-    return view('message');
-});
+Route::resource('/message', 'MessageController');
 
 Route::get('/stats', function () {
     $videos = App\Video::orderBy('created_at', 'desc')->paginate(10);
