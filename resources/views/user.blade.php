@@ -8,7 +8,7 @@
                 <img class="img-fluid" src="{{ asset('/square.png') }}" alt="photo">
             </div>
             <h3 class="mb-4">杜建军</h3>
-            <a href="#" class="btn btn-block btn-primary"><strong>Say "Hi!" to him</strong></a>
+            <a href="#" class="btn btn-block btn-primary mb-4"><strong>Say "Hi!" to him</strong></a>
         </div>
         <div class="col-md-9">
             <div class="card mb-3">
@@ -38,7 +38,7 @@
                 <div class="card-body">
                     <div class="row">
                         @foreach ($videos as $video)
-                        <a class="col-md-3" href="{{ url('/video/' . $video->id) }}"><img class="img-fluid poster" src="{{ url('/video/' . $video->id . '/poster.jpg') }}" alt="poster"></a>
+                        <a class="col-md-3 mb-3" href="{{ url('/video/' . $video->id) }}"><img class="img-fluid poster" src="{{ url('/video/' . $video->id . '/poster.jpg') }}" alt="poster"></a>
                         @endforeach
                     </div>
                 </div>
