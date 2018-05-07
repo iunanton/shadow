@@ -3,10 +3,14 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use App\Profile;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Carbon;
+use Illuminate\Http\Request;
+use Illuminate\Auth\Events\Registered;
 
 class RegisterController extends Controller
 {
@@ -23,6 +27,7 @@ class RegisterController extends Controller
 
     use RegistersUsers {
         showRegistrationForm as traitShowRegistrationForm;
+        register as traitRegister;
     }
 
     /**
@@ -59,6 +64,29 @@ class RegisterController extends Controller
     }
 
     /**
+     * Handle a registration request for the application.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function register(Request $request)
+    {
+        $this->validator($request->all())->validate();
+
+        event(new Registered($user = $this->create($request->all())));
+
+        Profile::create([
+            'user_id' => $request->input('id'),
+            'dateOfBirth' => $request->input('date_of_birth'),
+        ]);
+
+        $this->guard()->login($user);
+
+        return $this->registered($request, $user)
+                        ?: redirect($this->redirectPath());
+    }
+
+    /**
      * Get a validator for an incoming registration request.
      *
      * @param  array  $data
@@ -66,13 +94,18 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+        $dt = new Carbon();
+        $before = $dt->subYears(18)->format('Y-m-d');
+        $messages = ['date_of_birth.before' => 'Sorry, Shadow is 18 and up only. Come back later!'];
         return Validator::make($data, [
             'id' => 'required|string|max:16|unique:users',
             'username' => 'required|string|max:255|unique:users',
             'name' => 'required|string|max:255|not_in:'.$data['username'],
+            'date_of_birth' => 'required|date|before:'.$before,
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
-        ]);
+            'terms' => 'required',
+        ], $messages);
     }
 
     /**

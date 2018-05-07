@@ -46,10 +46,26 @@
 
                             <div class="col-md-6">
                                 <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>
+                                <small class="form-text text-muted">We'll never share your email with anyone else</small>
 
                                 @if ($errors->has('email'))
                                     <span class="invalid-feedback">
                                         <strong>{{ $errors->first('email') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="date-of-birth" class="col-md-4 col-form-label text-md-right" >{{ __('Date of birth') }}</a></label>
+
+                            <div class="col-md-6">
+                                <input id="date-of-birth" type="date" class="form-control{{ $errors->has('date_of_birth') ? ' is-invalid' : '' }}" name="date_of_birth" required>
+                                <small class="form-text text-muted">Your date of birth will not displayed by default</small>
+
+                                @if ($errors->has('date_of_birth'))
+                                    <span class="invalid-feedback">
+                                        <strong>{{ $errors->first('date_of_birth') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -79,15 +95,14 @@
 
                         <div class="form-group row">
                             <div class="col-md-6 offset-md-4">
-                                <input id="defaultCheck1" type="checkbox" required>
-                                <label class="form-check-label" for="defaultCheck1">I confirm I am 18 years of age or older</a></label>
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <div class="col-md-6 offset-md-4">
-                                <input id="defaultCheck1" type="checkbox" required>
-                                <label class="form-check-label" for="defaultCheck1">I agree to the <a href="{{ url('/terms') }}">terms of service</a></label>
+                                <input id="terms" type="checkbox" name="terms" required>
+                                <label class="form-check-label" for="terms">I agree to the <a href="{{ url('/terms') }}">terms of service</a></label>
+                                <!-- TODO: delete style display block -->
+                                @if ($errors->has('terms'))
+                                    <span class="invalid-feedback" style="display: block;">
+                                        <strong>{{ $errors->first('terms') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                         </div>
 
