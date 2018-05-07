@@ -25,6 +25,7 @@
                             <li class="list-inline-item">BMI: 20</li>
                         </ul>
                     </div>
+                    <hr>
                     <div class="card-text">
                         <h5>Description</h5>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus id sapien eu augue tincidunt auctor consequat ac diam. In sit amet quam nunc. Proin quis tellus dapibus, pulvinar mi et, interdum dolor. Maecenas finibus volutpat ex quis condimentum. Quisque interdum felis purus, id lobortis ligula interdum nec. Morbi et massa sollicitudin, commodo dolor eget, rhoncus leo. Quisque tempus sagittis fringilla.</p>
