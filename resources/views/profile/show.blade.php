@@ -19,7 +19,7 @@
                     <div class="card-text">
                         <h5>Basic</h5>
                         <ul class="list-inline">
-                            <li class="list-inline-item">Age: 28</li>
+                            <li class="list-inline-item">Age: {{ $profile->age }}</li>
                             <li class="list-inline-item">Height: {{ $profile->height }}</li>
                             <li class="list-inline-item">Weight: {{ $profile->weight }}</li>
                             <li class="list-inline-item">BMI: 20</li>

@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 
 class Profile extends Model
 {
@@ -23,6 +24,16 @@ class Profile extends Model
     public function getRouteKeyName()
     {
         return 'user_id';
+    }
+
+    /**
+     * Get the user's age.
+     *
+     * @return integer
+     */
+    public function getAgeAttribute()
+    {
+        return Carbon::parse($this->attributes['dateOfBirth'])->age;
     }
 
     /**
