@@ -60,7 +60,7 @@
                             <label for="date-of-birth" class="col-md-4 col-form-label text-md-right" >{{ __('Date of birth') }}</a></label>
 
                             <div class="col-md-6">
-                                <input id="date-of-birth" type="date" class="form-control{{ $errors->has('date_of_birth') ? ' is-invalid' : '' }}" name="date_of_birth" required>
+                                <input id="date-of-birth" type="date" class="form-control{{ $errors->has('date_of_birth') ? ' is-invalid' : '' }}" name="date_of_birth" value="{{ old('date_of_birth') }}" required>
                                 <small class="form-text text-muted">Your date of birth will not displayed by default</small>
 
                                 @if ($errors->has('date_of_birth'))
@@ -96,7 +96,7 @@
                         <div class="form-group row">
                             <div class="col-md-6 offset-md-4">
                                 <input id="terms" type="checkbox" name="terms" required>
-                                <label class="form-check-label" for="terms">I agree to the <a href="{{ url('/terms') }}">Terms of Service</a></label>
+                                <label class="form-check-label" for="terms">I agree to the <a href="{{ url('/terms') }}" target="_blank">Terms of Service</a></label>
                                 <!-- TODO: delete style display block -->
                                 @if ($errors->has('terms'))
                                     <span class="invalid-feedback" style="display: block;">
