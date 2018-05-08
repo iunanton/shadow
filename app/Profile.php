@@ -83,12 +83,4 @@ class Profile extends Model
         $weight = 35 + $this->attributes['weight'] * 0.5;
         return $weight / $height / $height;
     }
-
-    /**
-     * Get the user.
-     */
-    public function user()
-    {
-        return $this->belongsTo('App\User');
-    }
 }

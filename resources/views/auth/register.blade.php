@@ -96,7 +96,7 @@
                         <div class="form-group row">
                             <div class="col-md-6 offset-md-4">
                                 <input id="terms" type="checkbox" name="terms" required>
-                                <label class="form-check-label" for="terms">I agree to the <a href="{{ url('/terms') }}">terms of service</a></label>
+                                <label class="form-check-label" for="terms">I agree to the <a href="{{ url('/terms') }}">Terms of Service</a></label>
                                 <!-- TODO: delete style display block -->
                                 @if ($errors->has('terms'))
                                     <span class="invalid-feedback" style="display: block;">

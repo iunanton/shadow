@@ -7,7 +7,7 @@
             <div class="text-center mb-4">
                 <img class="img-fluid" src="{{ asset('/images/default.png') }}" alt="photo">
             </div>
-            <h3 class="mb-4">{{ $profile->user->name }}</h3>
+            <h3 class="mb-4">{{ $user->name }}</h3>
             <a href="#" class="btn btn-block btn-primary mb-4"><strong>Say "Hi!" to him</strong></a>
         </div>
         <div class="col-md-9">
@@ -19,19 +19,19 @@
                     <div class="card-text">
                         <h5>Basic</h5>
                         <ul class="list-inline">
-                            <li class="list-inline-item">Age: {{ $profile->age }}</li>
-                            <li class="list-inline-item">Height: {{ $profile->heightSI }}</li>
-                            <li class="list-inline-item">Weight: {{ $profile->weightSI }}</li>
-                            <li class="list-inline-item">BMI: {{ $profile->BMI }}</li>
+                            <li class="list-inline-item">Age: {{ $user->profile->age }}</li>
+                            <li class="list-inline-item">Height: {{ $user->profile->heightSI }}</li>
+                            <li class="list-inline-item">Weight: {{ $user->profile->weightSI }}</li>
+                            <li class="list-inline-item">BMI: {{ $user->profile->BMI }}</li>
                         </ul>
                     </div>
                     <hr>
                     <div class="card-text">
                         <h5>Description</h5>
-                        @empty ($profile->description)
+                        @empty ($user->profile->description)
                         <p>Not specified yet.</p>
                         @else
-                        <p>{{ $profile->description }}</p>
+                        <p>{{ $user->profile->description }}</p>
                         @endempty
                     </div>
                 </div>

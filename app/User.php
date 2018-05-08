@@ -29,9 +29,27 @@ class User extends Authenticatable
 
     public $incrementing = false;
 
+    /**
+     * Get the route key for the model.
+     *
+     * @return string
+     */
+    public function getRouteKeyName()
+    {
+        return 'username';
+    }
+
     public function isSuperAdmin()
     {
         return in_array($this->id, ['Ciuc7Hwfaiqum02w']);
+    }
+
+    /**
+     * Get the user's profile.
+     */
+    public function profile()
+    {
+        return $this->belongsTo('App\Profile');
     }
 
     public function videos()

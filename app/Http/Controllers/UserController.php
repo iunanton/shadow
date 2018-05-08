@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Profile;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 
-class ProfileController extends Controller
+class UserController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -26,7 +26,7 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        return redirect(action('ProfileController@show', Auth::user()->id));
+        return redirect(action('UserController@show', Auth::user()->username));
     }
 
     /**
@@ -56,12 +56,12 @@ class ProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Profile $profile)
+    public function show(User $user)
     {
-        $publicVideos = $profile->user->videos()->where('public', true)->get();
-        $privateVideos = $profile->user->videos()->where('public', false)->get();
+        $publicVideos = $user->videos()->where('public', true)->get();
+        $privateVideos = $user->videos()->where('public', false)->get();
         $data = [
-            'profile' => $profile,
+            'user' => $user,
             'publicVideos' => $publicVideos,
             'privateVideos' => $privateVideos,
         ];

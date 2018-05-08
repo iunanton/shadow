@@ -61,7 +61,7 @@
                                 </a>
 
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ action('ProfileController@index') }}">
+                                    <a class="dropdown-item" href="{{ action('UserController@index') }}">
                                         {{ __('Profile') }}
                                     </a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
