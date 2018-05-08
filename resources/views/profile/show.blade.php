@@ -19,7 +19,9 @@
                     <div class="card-text">
                         <h5>Basic</h5>
                         <ul class="list-inline">
-                            <li class="list-inline-item">Age: {{ $user->profile->age }}</li>
+                            @if ($user->profile->displayDOB)
+                                <li class="list-inline-item">Age: {{ $user->profile->age }}</li>
+                            @endif
                             <li class="list-inline-item">Height: {{ $user->profile->heightSI }}</li>
                             <li class="list-inline-item">Weight: {{ $user->profile->weightSI }}</li>
                             <li class="list-inline-item">BMI: {{ $user->profile->BMI }}</li>
@@ -58,7 +60,7 @@
                 </div>
                 <div class="card-body">
                     @if ($privateVideos->isEmpty())
-                        {{ __('No private video yet') }}
+                        {{ __('No private video yet.') }}
                     @else
                     <div class="row">
                         @foreach ($privateVideos as $video)
