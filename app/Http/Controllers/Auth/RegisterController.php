@@ -99,12 +99,12 @@ class RegisterController extends Controller
         $messages = ['date_of_birth.before' => 'Sorry, Shadow is 18 and up only. Come back later!'];
         return Validator::make($data, [
             'id' => 'required|string|max:16|unique:users',
-            'username' => 'required|string|max:255|unique:users',
+            'username' => 'required|string|alpha_num|max:255|unique:users',
             'name' => 'required|string|max:255|different:username',
             'date_of_birth' => 'required|date|before:'.$before,
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
-            'terms' => 'required',
+            'terms' => 'required|accepted',
         ], $messages);
     }
 
