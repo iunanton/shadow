@@ -18,8 +18,8 @@ class CreateProfilesTable extends Migration
             $table->string('user_id');
             $table->date('dateOfBirth');
             $table->boolean('displayDOB')->default(false);
-            $table->unsignedInteger('height')->nullable();
-            $table->unsignedInteger('weigth')->nullable();
+            $table->unsignedTinyInteger('height')->nullable();
+            $table->unsignedTinyInteger('weight')->nullable();
             $table->text('description')->nullable();
             $table->timestamps();
             $table->foreign('user_id')
