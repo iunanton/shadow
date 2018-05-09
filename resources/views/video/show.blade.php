@@ -30,7 +30,7 @@
                 </div>
                 <div class="col-6">
                     <h5><a class="text-dark" href="{{ url('/video/' . $item->id) }}">{{ str_limit($item->title, 32) }}</a></h5>
-                    <p><small class="text-muted">{{ $item->user->name }}</small></p>
+                    <p><small><a class="text-muted" href="{{ action('UserController@show', $item->user->username) }}">{{ $item->user->name }}</a></small></p>
                 </div>
             </div>
             @endforeach
