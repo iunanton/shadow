@@ -29,7 +29,7 @@
                     </a>
                 </div>
                 <div class="col-6">
-                    <h5><a class="text-dark" href="{{ url('/video/' . $item->id) }}">{{ $item->title }}</a></h5>
+                    <h5><a class="text-dark" href="{{ url('/video/' . $item->id) }}">{{ str_limit($item->title, 32) }}</a></h5>
                     <p><small class="text-muted">{{ $item->user->name }}</small></p>
                 </div>
             </div>
