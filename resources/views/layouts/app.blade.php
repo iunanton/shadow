@@ -44,10 +44,7 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
-                        @guest
-                            <li><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>
-                            <li><a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a></li>
-                        @else
+                        @auth
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ action('VideoController@create') }}">
                                     <svg viewBox="0 0 24 24" style="width: 24px; height: 24px;">
@@ -75,7 +72,7 @@
                                     </form>
                                 </div>
                             </li>
-                        @endguest
+                        @endauth
                     </ul>
                 </div>
             </div>
