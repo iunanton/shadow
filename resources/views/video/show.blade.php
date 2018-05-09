@@ -22,7 +22,7 @@
         </div>
         <div class="col-lg-4">
             @foreach ($asideVideos as $item)
-            <div class="row">
+            <div class="row mb-2">
                 <div class="col-6">
                     <a href="{{ url('/video/' . $item->id) }}">
                         <img class="img-fluid poster" src="{{ asset('/video/' . $item->id . '/poster.jpg') }}" alt="image">
