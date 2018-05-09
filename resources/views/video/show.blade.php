@@ -21,7 +21,7 @@
             </div>
         </div>
         <div class="col-lg-4">
-            @foreach ($videos as $item)
+            @foreach ($asideVideos as $item)
             <div class="row">
                 <div class="col-6">
                     <a href="{{ url('/video/' . $item->id) }}">

@@ -20,21 +20,6 @@ class VideoController extends Controller
         $this->middleware('auth');
     }
 
-    protected function getPublic()
-    {
-        return Video::where('public', 1)->whereIn('status', [2, 3])->get();
-    }
-
-    protected function getRandom($count = 1)
-    {
-        $videos = $this->getPublic();
-        $availebleCount = $videos->count();
-        if ($availebleCount < $count)
-            return $this->getPublic()->random($availebleCount);
-        else
-            return $this->getPublic()->random($count);
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -97,7 +82,17 @@ class VideoController extends Controller
     public function show(Video $video)
     {
         $this->authorize('view', $video);
-        return view('video.show')->with('video', $video)->with('videos', $this->getRandom(6));
+
+        $count = 6;
+        $publicVideos = Video::where('public', 1)->whereIn('status', [2, 3])->get();
+        $availableCount = $publicVideos->count();
+
+        $asideVideos = $publicVideos->random($availableCount < $count ? $availableCount : $count);
+
+        return view('video.show', [
+            'video' => $video,
+            'asideVideos' => $asideVideos,
+        ]);
     }
 
     public function getAsset(Video $video, $file)
