@@ -96,20 +96,15 @@ class VideoController extends Controller
      */
     public function show(Video $video)
     {
-        if (Gate::allows('view-video', $video)) {
-            return view('video.show')->with('video', $video)->with('videos', $this->getRandom(6));
-        } else {
-            return abort(404);
-        }
+        $this->authorize('view', $video);
+        return view('video.show')->with('video', $video)->with('videos', $this->getRandom(6));
     }
 
     public function getAsset(Video $video, $file)
     {
-        if (Gate::allows('view-video', $video)) {
-            return response()->file(storage_path("app/videos/$video->id/$file"))->setPrivate();
-        } else {
-            abort(404);
-        }
+        
+        $this->authorize('view', $video);
+        return response()->file(storage_path("app/videos/$video->id/$file"))->setPrivate();
     }
 
     /**
