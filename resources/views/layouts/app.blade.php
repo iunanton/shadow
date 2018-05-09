@@ -10,10 +10,6 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Favicon -->
-    <link rel="icon" href="{{{ asset('/images/blue_end_pause_shadow_stop_wait_icon_16.png') }}}" type="image/png" sizes="16x16">
-    <link rel="shortcut icon" href="{{{ asset('/images/blue_end_pause_shadow_stop_wait_icon_256.png') }}}" type="image/png" sizes="256x256">
-
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
 
