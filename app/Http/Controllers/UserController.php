@@ -58,8 +58,12 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        $publicVideos = $user->videos()->where('public', true)->get();
-        $privateVideos = $user->videos()->where('public', false)->get();
+        $publicVideos = $user->videos()
+            ->whereIn('status', [2, 3])
+            ->where('public', true)->get();
+        $privateVideos = $user->videos()
+            ->whereIn('status', [2, 3])
+            ->where('public', false)->get();
         $data = [
             'user' => $user,
             'publicVideos' => $publicVideos,
