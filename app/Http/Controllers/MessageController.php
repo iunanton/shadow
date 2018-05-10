@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use App\Message;
 use App\Jobs\ProcessMessage;
 
 class MessageController extends Controller
@@ -36,7 +37,23 @@ class MessageController extends Controller
      */
     public function store(Request $request)
     {
-        $path = $request->file('myfile')->store('/', 'messages');
+        $validatedData = $request->validate([
+            'myfile' => 'required|mimetypes:video/webm',
+        ]);
+
+        $path = $request->file('myfile')->store('/', 'uploads');
+
+        $id = pathinfo($path, PATHINFO_FILENAME);
+        $recipient = User::where('username', $request->input('recipient'))->firstOrFail();
+
+        Message::create([
+            'id' => $id,
+            'sender_id' => $request->user()->id,
+            'recipient_id' => $recipient->id,
+        ]);
+
+        ProcessMessage::dispatch($path);
+
         return 'OK';
     }
 
