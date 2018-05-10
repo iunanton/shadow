@@ -25,7 +25,7 @@ class MessageController extends Controller
      */
     public function create(User $user)
     {
-        return view('message');
+        return view('message', ['recipient' => $user]);
     }
 
     /**

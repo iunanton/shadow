@@ -8,8 +8,9 @@
                 <div class="card-body">
                     <form id="form" method="POST" action="/message" enctype="multipart/form-data">
                         @csrf
-                        <input type="submit">
+                        <input type="hidden" name="recipient" value="{{ $recipient->username }}">
                     </form>
+                    <h3>Message for {{ $recipient->name }}</h3>
                     <video id="feedback"></video>
                     <div>
                         <button id="button-record" class="btn btn-danger">Record</button>
