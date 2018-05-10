@@ -30,7 +30,11 @@ Route::get('/audio', function () {
     return view('audio');
 });
 
-Route::resource('/message', 'MessageController');
+Route::get('/message/create/{user}', [
+    'as' => 'message.create',
+    'uses' => 'MessageController@create'
+]);
+Route::resource('/message', 'MessageController', ['except' => 'create']);
 
 Route::get('/stats', function () {
     $videos = App\Video::orderBy('created_at', 'desc')->paginate(10);
