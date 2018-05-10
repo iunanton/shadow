@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 
-class UserController extends Controller
+class ProfileController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -26,7 +26,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return redirect(action('UserController@show', Auth::user()->username));
+        return redirect(action('ProfileController@show', Auth::user()->username));
     }
 
     /**

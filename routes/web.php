@@ -19,7 +19,7 @@ Route::get('/terms', function () {
 
 Auth::routes();
 
-Route::resource('/user', 'UserController');
+Route::resource('/profile', 'ProfileController');
 
 Route::resource('/video', 'VideoController');
 
