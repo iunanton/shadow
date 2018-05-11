@@ -69,7 +69,7 @@ class MessageController extends Controller
             'recipient_id' => $recipient->id,
         ]);
 
-        ProcessMessage::dispatch($path);
+        ProcessMessage::dispatch($path)->onQueue('messages');
 
         return 'OK';
     }
