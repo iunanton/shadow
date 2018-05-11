@@ -38,6 +38,9 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ action('VideoController@index') }}">{{ __('Videos') }}</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ action('MessageController@index') }}">{{ __('Messages') }}</a>
+                            </li>
                         @endauth
                     </ul>
 

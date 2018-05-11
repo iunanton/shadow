@@ -4,11 +4,22 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Message;
 use App\Jobs\ProcessMessage;
 
 class MessageController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +27,13 @@ class MessageController extends Controller
      */
     public function index()
     {
-        return 'OK';
+        $userId = Auth::user()->id;
+        $messages = Message::where('status', 0)
+            ->where('sender_id', $userId)
+            ->orWhere('recipient_id', $userId)
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
+        return view('message.index', ['messages' => $messages]);
     }
 
     /**
@@ -26,7 +43,7 @@ class MessageController extends Controller
      */
     public function create(User $user)
     {
-        return view('message', ['recipient' => $user]);
+        return view('message.create', ['recipient' => $user]);
     }
 
     /**
@@ -63,9 +80,15 @@ class MessageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Message $message)
     {
-        //
+        return view('message.show', ['message' => $message]);
+    }
+
+    public function getAsset(Message $message, $file)
+    {
+        //$this->authorize('view', $message);
+        return response()->file(storage_path("app/messages/$message->id/$file"))->setPrivate();
     }
 
     /**

@@ -27,7 +27,7 @@
 <script type="text/javascript">
 (function(){
 
-var constraints = { video: true, audio: true };
+var constraints = { video: { height: 480 }, audio: true };
 var localStream, blob;
 var chunks = [];
 

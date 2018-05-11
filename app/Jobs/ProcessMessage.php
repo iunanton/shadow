@@ -45,6 +45,6 @@ class ProcessMessage implements ShouldQueue
      */
     public function handle()
     {
-        //
+        exec("process-m {$this->path}");
     }
 }

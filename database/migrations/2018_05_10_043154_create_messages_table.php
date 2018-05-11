@@ -17,6 +17,8 @@ class CreateMessagesTable extends Migration
             $table->string('id')->unique();
             $table->string('sender_id');
             $table->string('recipient_id');
+            $table->unsignedInteger('status')
+                 ->default(0);
             $table->timestamps();
             $table->foreign('sender_id')
                 ->references('id')
