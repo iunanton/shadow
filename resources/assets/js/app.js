@@ -26,5 +26,9 @@ Vue.component('example-component', require('./components/ExampleComponent.vue'))
 Vue.component('video-player', require('./components/VideoPlayer.vue'));
 
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+    data: {
+        height: 0,
+        weight: 0
+    }
 });
