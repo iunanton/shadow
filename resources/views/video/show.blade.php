@@ -8,7 +8,7 @@
         </div>
     @endif
     <div class="row">
-        <div class="col-lg-8">
+        <div class="col-lg-8 mb-3">
             <video-player manifest="{{ url('/video/' . $video->id . '/manifest.mpd') }}" poster="{{ url('/video/' . $video->id . '/poster.jpg') }}"></video-player>
             <div>
                 <h2>{{ $video->title }}</h2>
@@ -30,7 +30,7 @@
                 </div>
                 <div class="col-6">
                     <h5><a class="text-dark" href="{{ url('/video/' . $item->id) }}">{{ str_limit($item->title, 32) }}</a></h5>
-                    <p><small><a class="text-muted" href="{{ action('ProfileController@show', $item->user->username) }}">{{ $item->user->name }}</a></small></p>
+                    <p><small><a href="{{ action('ProfileController@show', $item->user->username) }}">{{ $item->user->name }}</a></small></p>
                 </div>
             </div>
             @endforeach

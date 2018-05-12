@@ -7,7 +7,7 @@
             {{ session('status') }}
         </div>
     @endif
-    <div class="row text-center">
+    <div class="row justify-content-center">
         <div class="col-lg-8">
             <video-player manifest="{{ url('/message/' . $message->id . '/manifest.mpd') }}" poster="{{ url('/message/' . $message->id . '/poster.jpg') }}"></video-player>
             <div>

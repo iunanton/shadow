@@ -50,6 +50,7 @@ if (navigator.mediaDevices.getUserMedia === undefined) {
 navigator.mediaDevices.getUserMedia(constraints)
 .then(function(stream) {
     localStream = stream;
+    feedback.muted = true;
     if ("srcObject" in feedback) {
         feedback.srcObject = stream;
     } else {
@@ -133,6 +134,7 @@ navigator.mediaDevices.getUserMedia(constraints)
             feedback.src = null;
         }
 
+        feedback.muted = false;
         feedback.controls = true;
         feedback.onloadedmetadata = null;
         feedback.src = window.URL.createObjectURL(blob);

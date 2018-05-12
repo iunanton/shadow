@@ -23,7 +23,7 @@
                     <h5 class="card-title">
                         <a class="text-dark" href="{{ action('VideoController@show', $item->id) }}">{{ $item->title }}</a>
                     </h5>
-                    <p class="card-text"><small><a class="text-muted" href="{{ action('ProfileController@show', $item->user->username) }}">{{ $item->user->name }}</a></small></p>
+                    <p class="card-text"><small><a href="{{ action('ProfileController@show', $item->user->username) }}">{{ $item->user->name }}</a></small></p>
                 </div>
             </div>
         @endforeach

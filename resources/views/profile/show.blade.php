@@ -8,7 +8,7 @@
                 <img class="img-fluid" src="{{ asset('/images/default.png') }}" alt="photo">
             </div>
             <h3 class="mb-4">{{ $user->name }}</h3>
-            <a href="#" class="btn btn-block btn-primary mb-4"><strong>Say "Hi!" to him</strong></a>
+            <a href="{{ action('MessageController@create', $user->username) }}" class="btn btn-block btn-primary mb-4"><strong>Say "Hi!" to him</strong></a>
         </div>
         <div class="col-md-9">
             <div class="card mb-3">
