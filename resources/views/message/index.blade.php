@@ -28,7 +28,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <a href="{{ action('MessageController@show', $message->id) }}">
-                                        <img class="img-fluid poster" src="{{ asset('/message/'.$message->id.'/poster.jpg') }}" alt="poster">
+                                        <img class="img-fluid poster" src="{{ action('MessageController@getAsset', [$message->id, 'poster.jpg']) }}" alt="poster">
                                     </a>
                                 </div>
                             </div>

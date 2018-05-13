@@ -20,7 +20,7 @@
                     </div>
                     @else
                     <a href="{{ action('VideoController@show', $video->id) }}">
-                        <img class="img-fluid poster" src="{{ asset('/video/'.$video->id.'/poster.jpg') }}" alt="poster">
+                        <img class="img-fluid poster" src="{{ action('VideoController@getAsset', [$video->id, 'poster.jpg']) }}" alt="poster">
                     </a>
                     @endif
                 </div>

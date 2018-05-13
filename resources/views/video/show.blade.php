@@ -9,7 +9,7 @@
     @endif
     <div class="row">
         <div class="col-lg-8 mb-3">
-            <video-player manifest="{{ url('/video/' . $video->id . '/manifest.mpd') }}" poster="{{ url('/video/' . $video->id . '/poster.jpg') }}"></video-player>
+            <video-player manifest="{{ action('VideoController@getAsset', [$video->id, 'manifest.mpd']) }}" poster="{{ action('VideoController@getAsset', [$video->id, 'poster.jpg']) }}"></video-player>
             <div>
                 <h2>{{ $video->title }}</h2>
                 @if ($video->user_id == Auth::user()->id)
@@ -24,8 +24,8 @@
             @foreach ($asideVideos as $item)
             <div class="row mb-2">
                 <div class="col-6">
-                    <a href="{{ url('/video/' . $item->id) }}">
-                        <img class="img-fluid poster" src="{{ asset('/video/' . $item->id . '/poster.jpg') }}" alt="image">
+                    <a href="{{ url('/videos/' . $item->id) }}">
+                        <img class="img-fluid poster" src="{{ action('VideoController@getAsset', [$item->id, 'poster.jpg']) }}" alt="image">
                     </a>
                 </div>
                 <div class="col-6">

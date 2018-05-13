@@ -17,7 +17,7 @@
         @foreach ($videos as $item)
             <div class="card">
                 <a href="{{ action('VideoController@show', $item->id) }}">
-                    <img class="card-img-top poster" src="{{ asset('/video/' . $item->id . '/poster.jpg') }}" alt="Poster">
+                    <img class="card-img-top poster" src="{{ asset('/videos/' . $item->id . '/poster.jpg') }}" alt="Poster">
                 </a>
                 <div class="card-body">
                     <h5 class="card-title">

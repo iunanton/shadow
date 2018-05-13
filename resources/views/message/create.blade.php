@@ -6,7 +6,7 @@
         <div class="col-md-10">
             <div class="card">
                 <div class="card-body">
-                    <form id="form" method="POST" action="/message" enctype="multipart/form-data">
+                    <form id="form" method="POST" action="{{ action('MessageController@store') }}" enctype="multipart/form-data">
                         @csrf
                         <input type="hidden" name="recipient" value="{{ $recipient->username }}">
                     </form>

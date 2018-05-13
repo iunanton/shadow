@@ -60,7 +60,7 @@
                     @else
                     <div class="row">
                         @foreach ($publicVideos as $video)
-                        <a class="col-md-3 mb-3" href="{{ url('/video/' . $video->id) }}"><img class="img-fluid poster" src="{{ asset('/video/' . $video->id . '/poster.jpg') }}" alt="poster"></a>
+                        <a class="col-md-3 mb-3" href="{{ action('VideoController@show', $video->id) }}"><img class="img-fluid poster" src="{{ action('VideoController@getAsset', [$video->id, 'poster.jpg']) }}" alt="poster"></a>
                         @endforeach
                     </div>
                     @endif
@@ -76,7 +76,7 @@
                     @else
                     <div class="row">
                         @foreach ($privateVideos as $video)
-                        <a class="col-md-3 mb-3" href="{{ url('/video/' . $video->id) }}"><img class="img-fluid poster" src="{{ url('/video/' . $video->id . '/poster.jpg') }}" alt="poster"></a>
+                        <a class="col-md-3 mb-3" href="{{ action('VideoController@show', $video->id) }}"><img class="img-fluid poster" src="{{ action('VideoController@getAsset', [$video->id, 'poster.jpg']) }}" alt="poster"></a>
                         @endforeach
                     </div>
                     @endif

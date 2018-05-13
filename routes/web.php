@@ -19,24 +19,24 @@ Route::get('/terms', function () {
 
 Auth::routes();
 
-Route::resource('/profile', 'ProfileController');
+Route::resource('/profiles', 'ProfileController');
 
-Route::resource('/video', 'VideoController');
+Route::resource('/videos', 'VideoController');
 
-Route::get('/video/{video}/{file}', 'VideoController@getAsset')
+Route::get('/videos/{video}/{file}', 'VideoController@getAsset')
     ->where('file', '(.*)');
 
-Route::get('/audio', function () {
+Route::get('/audios', function () {
     return view('audio');
 });
 
-Route::get('/message/create/{user}', [
+Route::get('/messages/create/{user}', [
     'as' => 'message.create',
     'uses' => 'MessageController@create'
 ]);
-Route::resource('/message', 'MessageController', ['except' => 'create']);
+Route::resource('/messages', 'MessageController', ['except' => 'create']);
 
-Route::get('/message/{message}/{file}', 'MessageController@getAsset')
+Route::get('/messages/{message}/{file}', 'MessageController@getAsset')
     ->where('file', '(.*)');
 
 Route::get('/stats', function () {
