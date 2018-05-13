@@ -9,6 +9,9 @@
             </div>
             <h3 class="mb-4">{{ $user->name }}</h3>
             <a href="{{ action('MessageController@create', $user->username) }}" class="btn btn-block btn-primary mb-4"><strong>Say "Hi!" to him</strong></a>
+            @can ('update', $user->profile)
+            <a href="{{ action('ProfileController@edit', $user->username) }}" class="btn btn-block btn-info mb-4"><strong>Edit profile</strong></a>
+            @endcan
         </div>
         <div class="col-md-9">
 
