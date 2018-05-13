@@ -78,9 +78,9 @@ class ProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        return view('profile.edit');
+        return view('profile.edit')->withUser($user);
     }
 
     /**
@@ -90,9 +90,16 @@ class ProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
-        return $request->all();
+        $input = array_add(
+            $request->except('displayDOB'),
+            'displayDOB',
+            is_null($request->input('displayDOB')) ? false : true);
+
+        $user->profile->fill($input)->save();
+        return redirect(action('ProfileController@show', $user->username))
+                   ->withStatus('Profile was successful updated!');
     }
 
     /**

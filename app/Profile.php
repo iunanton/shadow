@@ -36,6 +36,16 @@ class Profile extends Model
         return Carbon::parse($this->attributes['dateOfBirth'])->age;
     }
 
+    private function transformHeight()
+    {
+        return 1.2 + 0.1 * ($this->attributes['height'] - 1);
+    }
+
+    private function transformWeight()
+    {
+        return 35 + 5 * ($this->attributes['weight'] - 1);
+    }
+
     /**
      * Get the user's age.
      *
@@ -43,13 +53,18 @@ class Profile extends Model
      */
     public function getHeightSIAttribute()
     {
-        if (is_null($this->attributes['height']))
-        {
-            return 0;
+        if (is_null($this->attributes['height'])) {
+            return 'not specified';
         }
-        $min = 1.2;
-        $gap = 0.005;
-        return $min + $this->attributes['height'] * $gap;
+
+        switch ($this->attributes['height']) {
+            case 0:
+                return 'below 1.2';
+            case 13:
+                return '2.4 and above';
+            default:
+                return $this->transformHeight();
+        }
     }
 
     /**
@@ -59,13 +74,18 @@ class Profile extends Model
      */
     public function getWeightSIAttribute()
     {
-        if (is_null($this->attributes['weight']))
-        {
-            return 0;
+        if (is_null($this->attributes['weight'])) {
+            return 'not specified';
         }
-        $min = 35;
-        $gap = 0.5;
-        return $min + $this->attributes['weight'] * $gap;
+
+        switch ($this->attributes['weight']) {
+            case 0:
+                return 'below 35';
+            case 20:
+                return '130 and above';
+            default:
+                return $this->transformWeight();
+        }
     }
 
     /**
@@ -75,12 +95,11 @@ class Profile extends Model
      */
     public function getBMIAttribute()
     {
-        if (is_null($this->attributes['height']) || is_null($this->attributes['weight']))
-        {
+        if (is_null($this->attributes['height']) || is_null($this->attributes['weight'])) {
             return 0;
         }
-        $height = 1.2 + $this->attributes['height'] * 0.005;
-        $weight = 35 + $this->attributes['weight'] * 0.5;
-        return $weight / $height / $height;
+        $height = $this->transformHeight();
+        $weight = $this->transformWeight();
+        return round($weight / $height / $height);
     }
 }

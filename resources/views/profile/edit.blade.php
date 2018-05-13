@@ -18,20 +18,18 @@
                         @csrf
 
                         <div class="form-group form-check">
-                            <input id="displayDOB" type="checkbox" class="form-check-input" name="displayDOB">
+                            <input id="displayDOB" type="checkbox" class="form-check-input" name="displayDOB"
+                            @if ($user->profile->displayDOB)
+                                checked
+                            @endif
+                            >
                             <label class="form-check-label" for="displayDOB">Display my age</label>
                         </div>
-                        <div class="form-group">
-                            <label for="height">Height: @{{ 1.2 + 0.01 * height }}</label>
-                            <input id="height" v-model="height" type="range" class="form-control-range" name="height">
-                        </div>
-                        <div class="form-group">
-                            <label for="weight">Weight: @{{ 35 + 0.5 * weight }}</label>
-                            <input id="weight" v-model="weight" type="range" class="form-control-range" name="weight">
-                        </div>
+                        <height-input value="{{ $user->profile->height }}"></height-input>
+                        <weight-input value="{{ $user->profile->weight }}"></weight-input>
                         <div class="form-group">
                             <label for="description">Description:</label>
-                            <textarea id="description" class="form-control" rows="5" name="description"></textarea>
+                            <textarea id="description" class="form-control" rows="5" name="description">{{ $user->profile->description }}</textarea>
                         </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>

@@ -11,6 +11,15 @@
             <a href="{{ action('MessageController@create', $user->username) }}" class="btn btn-block btn-primary mb-4"><strong>Say "Hi!" to him</strong></a>
         </div>
         <div class="col-md-9">
+
+    @if (session('status'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ session('status') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
             <div class="card mb-3">
                 <div class="card-header">
                     {{ __('About me') }}
