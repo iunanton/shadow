@@ -24,11 +24,9 @@ window.Vue = require('vue');
 
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
 Vue.component('video-player', require('./components/VideoPlayer.vue'));
+Vue.component('height-input', require('./components/HeightInput.vue'));
+Vue.component('weight-input', require('./components/WeightInput.vue'));
 
 const app = new Vue({
-    el: '#app',
-    data: {
-        height: 0,
-        weight: 0
-    }
+    el: '#app'
 });
