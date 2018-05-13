@@ -24,12 +24,12 @@
             @foreach ($asideVideos as $item)
             <div class="row mb-2">
                 <div class="col-6">
-                    <a href="{{ url('/videos/' . $item->id) }}">
+                    <a href="{{ action('VideoController@show', $item->id) }}">
                         <img class="img-fluid poster" src="{{ action('VideoController@getAsset', [$item->id, 'poster.jpg']) }}" alt="image">
                     </a>
                 </div>
                 <div class="col-6">
-                    <h5><a class="text-dark" href="{{ url('/video/' . $item->id) }}">{{ str_limit($item->title, 32) }}</a></h5>
+                    <h5><a class="text-dark" href="{{ action('VideoController@show', $item->id) }}">{{ str_limit($item->title, 32) }}</a></h5>
                     <p><small><a href="{{ action('ProfileController@show', $item->user->username) }}">{{ $item->user->name }}</a></small></p>
                 </div>
             </div>
