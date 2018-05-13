@@ -84,6 +84,13 @@
         <main class="py-4">
             @yield('content')
         </main>
+
+        <footer class="container">
+            <hr>
+            <div class="text-center mb-2">
+                Designed by <a href="https://edgeconsult.me">Edge Consulting HK</a>
+            </div>
+        </footer>
     </div>
 </body>
 </html>
