@@ -15,13 +15,11 @@
                     <div>
                         <video id="feedback" class=""></video>
                     </div>
-                    <div class="progress mb-2" style="height: 5px;">
-                        <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                    <div id="progress" class="progress mb-2" style="height: 5px;">
+                        <div id="progress-bar" class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                     <div>
                         <button id="button-record" class="btn btn-danger">Record</button>
-                        <button id="button-pause" class="btn btn-danger" style="display: none;">Pause</button>
-                        <button id="button-resume" class="btn btn-danger" style="display: none;">Resume</button>
                         <button id="button-stop" class="btn btn-secondary" disabled>Stop</button>
                         <button id="button-submit" class="btn btn-secondary" disabled>Submit</button>
                     </div>
@@ -67,50 +65,55 @@ navigator.mediaDevices.getUserMedia(constraints)
     };
 
     var buttonRecord = document.getElementById('button-record');
-    var buttonPause = document.getElementById('button-pause');
-    var buttonResume = document.getElementById('button-resume');
     var buttonStop = document.getElementById('button-stop');
     var buttonSubmit = document.getElementById('button-submit');
 
+    var maxDuration = 5000;
+    var progressBarTimeout = 250;
+
+    var progressBarValue = 0;
+    var progressBar = document.getElementById('progress-bar');
+
     var mediaRecorder = new MediaRecorder(stream);
 
-    buttonRecord.onclick = function() {
+    function updateProgressBar() {
+        if (mediaRecorder.state == "inactive") return;
+        progressBarValue = progressBarValue + progressBarTimeout * 100 / maxDuration;
+        progressBar.style.width = progressBarValue + "%";
+        setTimeout(updateProgressBar, progressBarTimeout);
+    }
+
+    function startRecording() {
         mediaRecorder.start();
         console.log(mediaRecorder.state);
         console.log("recorder started");
-        this.style.display = "none";
-        buttonPause.style.display = "inline-block";
+        this.disabled = true;
         buttonStop.disabled = false;
+        updateProgressBar();
     }
 
-    buttonPause.onclick = function() {
-        mediaRecorder.pause();
-        console.log(mediaRecorder.state);
-        console.log("recorder paused");
-        this.style.display = "none";
-        buttonResume.style.display = "inline-block";
-    }
-
-    buttonResume.onclick = function() {
-        mediaRecorder.resume();
-        console.log(mediaRecorder.state);
-        console.log("recorder resumed");
-        this.style.display = "none";
-        buttonPause.style.display = "inline-block";
-    }
-
-    buttonStop.onclick = function() {
+    function stopRecording() {
+        if (mediaRecorder.state == "inactive") return;
         mediaRecorder.stop();
         console.log(mediaRecorder.state);
         console.log("recorder stopped");
-        buttonPause.disabled = true;
-        buttonResume.disabled = true;
+        buttonStop.disabled = true;
         buttonSubmit.disabled = false;
     }
+
+    buttonRecord.onclick = startRecording;
+
+    buttonStop.onclick = stopRecording;
 
     buttonSubmit.onclick = function() {
         console.log("submit pressed");
         document.getElementById('form').submit();
+    }
+
+    mediaRecorder.onstart = function() {
+        setTimeout(function() {
+            stopRecording();
+        }, maxDuration);
     }
 
     mediaRecorder.onstop = function(e) {
