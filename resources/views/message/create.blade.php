@@ -9,6 +9,8 @@
                     <form id="form" method="POST" action="{{ action('MessageController@store') }}" enctype="multipart/form-data">
                         @csrf
                         <input type="hidden" name="recipient" value="{{ $recipient->username }}">
+                        <input id="video" type="hidden" name="video" value="">
+                        <input type="submit">
                     </form>
                     <h3>Message for {{ $recipient->name }}</h3>
                     <video id="feedback"></video>
@@ -17,7 +19,7 @@
                         <button id="button-pause" class="btn btn-danger" style="display: none;">Pause</button>
                         <button id="button-resume" class="btn btn-danger" style="display: none;">Resume</button>
                         <button id="button-stop" class="btn btn-secondary" disabled>Stop</button>
-                        <button id="button-submit" type="submit" class="btn btn-secondary" disabled>Submit</button>
+                        <button id="button-submit" class="btn btn-secondary" disabled>Submit</button>
                     </div>
                 </div>
             </div>
@@ -105,19 +107,25 @@ navigator.mediaDevices.getUserMedia(constraints)
     buttonSubmit.onclick = function() {
         console.log("submit pressed");
 
-        var form = document.getElementById('form');
-
-        var data = new FormData(form);
-        data.append("myfile", blob, "filename.txt");
-
-        var request = new XMLHttpRequest();
-        request.onreadystatechange = function () {
-            if (request.readyState == 4 && request.status == 200) {
-                console.log(request.responseText);
-            }
+        var reader = new FileReader();
+        reader.onload = function() {
+            document.getElementById('video').value = reader.result;
         };
-        request.open('POST', "{{ action('MessageController@store') }}");
-        request.send(data);
+        reader.readAsDataURL(blob);
+
+        //var form = document.getElementById('form');
+
+        //var data = new FormData(form);
+        //data.append("myfile", blob, "filename.txt");
+
+        //var request = new XMLHttpRequest();
+        //request.onreadystatechange = function () {
+        //    if (request.readyState == 4 && request.status == 200) {
+        //        console.log(request.responseText);
+        //    }
+        //};
+        //request.open('POST', "{{ action('MessageController@store') }}");
+        //request.send(data);
     }
 
     mediaRecorder.onstop = function(e) {

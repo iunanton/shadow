@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use App\Message;
 use App\Jobs\ProcessMessage;
 
@@ -55,23 +56,26 @@ class MessageController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'myfile' => 'required|mimetypes:video/webm',
+            'recipient' => 'required|string',
+            'video' => 'required|string',
         ]);
 
-        $path = $request->file('myfile')->store('/', 'uploads');
+        $data = explode(';base64,', $request->input('video'));
+        $path = str_random(40);
+        Storage::disk('uploads')->put($path, base64_decode($data[1]));
 
-        $id = pathinfo($path, PATHINFO_FILENAME);
         $recipient = User::where('username', $request->input('recipient'))->firstOrFail();
 
         Message::create([
-            'id' => $id,
+            'id' => $path,
             'sender_id' => $request->user()->id,
             'recipient_id' => $recipient->id,
         ]);
 
         ProcessMessage::dispatch($path)->onQueue('messages');
 
-        return 'OK';
+        return redirect(action('MessageController@index'))
+                   ->with('status', 'Message successfully sent!');
     }
 
     /**
