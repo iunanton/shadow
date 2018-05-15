@@ -10,10 +10,14 @@
                         @csrf
                         <input type="hidden" name="recipient" value="{{ $recipient->username }}">
                         <input id="video" type="hidden" name="video" value="">
-                        <input type="submit">
                     </form>
                     <h3>Message for {{ $recipient->name }}</h3>
-                    <video id="feedback"></video>
+                    <div>
+                        <video id="feedback" class=""></video>
+                    </div>
+                    <div class="progress mb-2" style="height: 5px;">
+                        <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
                     <div>
                         <button id="button-record" class="btn btn-danger">Record</button>
                         <button id="button-pause" class="btn btn-danger" style="display: none;">Pause</button>
@@ -30,7 +34,7 @@
 (function(){
 
 var constraints = { video: { height: 480 }, audio: true };
-var localStream, blob;
+var localStream;
 var chunks = [];
 
 if (navigator.mediaDevices === undefined) {
@@ -106,26 +110,7 @@ navigator.mediaDevices.getUserMedia(constraints)
 
     buttonSubmit.onclick = function() {
         console.log("submit pressed");
-
-        var reader = new FileReader();
-        reader.onload = function() {
-            document.getElementById('video').value = reader.result;
-        };
-        reader.readAsDataURL(blob);
-
-        //var form = document.getElementById('form');
-
-        //var data = new FormData(form);
-        //data.append("myfile", blob, "filename.txt");
-
-        //var request = new XMLHttpRequest();
-        //request.onreadystatechange = function () {
-        //    if (request.readyState == 4 && request.status == 200) {
-        //        console.log(request.responseText);
-        //    }
-        //};
-        //request.open('POST', "{{ action('MessageController@store') }}");
-        //request.send(data);
+        document.getElementById('form').submit();
     }
 
     mediaRecorder.onstop = function(e) {
@@ -133,7 +118,7 @@ navigator.mediaDevices.getUserMedia(constraints)
         localStream.getTracks().forEach(function (track) {
             track.stop();
         });
-        blob = new Blob(chunks, { 'type' : 'video/mp4' });
+        var blob = new Blob(chunks, { 'type' : 'video/mp4' });
         chunks = [];
 
         if ("srcObject" in feedback) {
@@ -146,6 +131,12 @@ navigator.mediaDevices.getUserMedia(constraints)
         feedback.controls = true;
         feedback.onloadedmetadata = null;
         feedback.src = window.URL.createObjectURL(blob);
+
+        var reader = new FileReader();
+        reader.onload = function() {
+            document.getElementById('video').value = reader.result;
+        };
+        reader.readAsDataURL(blob);
 
       console.log("recorder stopped");
     }
