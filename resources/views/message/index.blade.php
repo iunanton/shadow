@@ -24,7 +24,7 @@
                             <h3 class="mb-1" style="display:inline-block">
                                 <a href="{{ action('ProfileController@show', $message->sender->username) }}">{{ $message->sender->name }}</a>
                             </h3>
-                            <p class="mb-1" style="display:inline-block">{{ $message->created_at }}</p>
+                            <p class="mb-1" style="display:inline-block">on {{ $message->created_at->toFormattedDateString() }}</p>
                             <div class="row">
                                 <div class="col-md-6">
                                     <a href="{{ action('MessageController@show', $message->id) }}">
