@@ -13,7 +13,7 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    <form method="POST" action="{{ action('ProfileController@update', 'iunanton') }}">
+                    <form method="POST" action="{{ action('ProfileController@update', $user->username) }}">
                         @method('PUT')
                         @csrf
 
