@@ -108,9 +108,9 @@ class VideoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Video $video)
     {
-        //
+        return view('video.edit')->withVideo($video);
     }
 
     /**
@@ -120,9 +120,15 @@ class VideoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Video $video)
     {
-        //
+        $input = [
+            'public' => is_null($request->input('public')) ? false : true
+        ];
+
+        $video->fill($input)->save();
+        return redirect(action('VideoController@index'))
+                   ->withStatus('Video was successful updated!');
     }
 
     /**
