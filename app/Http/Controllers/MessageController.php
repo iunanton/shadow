@@ -92,7 +92,7 @@ class MessageController extends Controller
     public function getAsset(Message $message, $file)
     {
         //$this->authorize('view', $message);
-        return response()->file(storage_path("app/messages/$message->id/$file"))->setPrivate();
+        return Storage::disk('messages')->download("$video->id/$file")->setPrivate();
     }
 
     /**
