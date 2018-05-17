@@ -17,6 +17,11 @@
                         @method('PUT')
                         @csrf
 
+                        <div class="form-group">
+                            <label for="title">{{ __('Title:') }}</label>
+                            <input id="title" type="text" class="form-control" name="title" value="{{ $video->title }}">
+                        </div>
+
                         <div class="form-group form-check">
                             <input id="public" type="checkbox" class="form-check-input" name="public"
                             @if ($video->public)

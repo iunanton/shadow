@@ -122,9 +122,10 @@ class VideoController extends Controller
      */
     public function update(Request $request, Video $video)
     {
-        $input = [
-            'public' => is_null($request->input('public')) ? false : true
-        ];
+        $input = array_add(
+            $request->except('public'),
+            'public',
+            is_null($request->input('public')) ? false : true);
 
         $video->fill($input)->save();
         return redirect(action('VideoController@index'))
