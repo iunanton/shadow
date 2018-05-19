@@ -73,11 +73,11 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-3 text-muted">Created at:</div>
-                        <div class="col-sm-9">{{ $video->created_at }}</div>
+                        <div class="col-sm-9">{{ $video->created_at->toFormattedDateString() }}</div>
                     </div>
                     <div class="row">
                         <div class="col-sm-3 text-muted">Updated at:</div>
-                        <div class="col-sm-9">{{ $video->updated_at }}</div>
+                        <div class="col-sm-9">{{ $video->updated_at->toFormattedDateString() }}</div>
                     </div>
                     <a href="{{ action('VideoController@edit', $video->id) }}" class="btn btn-primary mt-2">Edit</a>
                     <a href="{{ action('VideoController@destroy', $video->id) }}" class="btn btn-secondary mt-2">Delete</a>
