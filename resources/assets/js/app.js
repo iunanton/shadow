@@ -28,5 +28,41 @@ Vue.component('height-input', require('./components/HeightInput.vue'));
 Vue.component('weight-input', require('./components/WeightInput.vue'));
 
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+    data: {
+        user: window.user,
+    },
+    methods: {
+        myFunc() {
+            console.log("Call myFunc()");
+            if (this.user === null) {
+                console.log("user is null");
+                return;
+            }
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    console.log(this.responseText);
+                }
+            };
+            xhttp.open("GET", "/api/user", true);
+            xhttp.setRequestHeader("Accept","text/json");
+            xhttp.setRequestHeader("Authorization","Bearer " + this.user.api_token);
+            xhttp.send();
+        },
+        getUser() {
+            console.log("Call getUser()");
+            if (this.user === null) {
+                console.log("user is null");
+                return;
+            }
+            axios.get('/api/user', {headers: {'Authorization': 'Bearer ' + this.user.api_token }})
+                 .then((responce) => {
+                     console.log(responce.data);
+                 })
+                 .catch(function (error) {
+                     console.log(error);
+                 });
+        }
+    }
 });

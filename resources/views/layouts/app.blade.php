@@ -11,6 +11,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
+    <script>window.user = {!! Auth::check() ? Auth::user()->toJson() : 'null' !!}</script>
     <script src="{{ asset('js/app.js') }}" defer></script>
 
     <!-- Fonts -->
