@@ -4,17 +4,23 @@
 
 <script>
     export default {
-        props: ['manifest', 'poster'],
+        props: ['src'],
         mounted() {
             window.HELP_IMPROVE_VIDEOJS = false;
+
+            var customCallback = function (player, mediaPlayer) {
+                mediaPlayer.getDebug().setLogToBrowserConsole(false);
+            };
+
+            videojs.Html5DashJS.hook('beforeinitialize', customCallback);
 
             var player = videojs('video', {
                controls: true,
                //fluid: true,
-               poster: this.poster
+               poster: this.src + '/poster.jpg'
             });
 
-            var manifest = this.manifest;
+            var manifest = this.src + '/manifest.mpd';
 
             player.ready(function() {
                 this.src({

@@ -9,7 +9,7 @@
     @endif
     <div class="row">
         <div class="col-lg-8 mb-3">
-            <video-player manifest="{{ action('VideoController@getAsset', [$video->id, 'manifest.mpd']) }}" poster="{{ action('VideoController@getAsset', [$video->id, 'poster.jpg']) }}"></video-player>
+            <video-player src="{{ route('video', $video->id) }}"></video-player>
             <div>
                 <h2>{{ $video->title }}</h2>
                 @if ($video->user_id == Auth::user()->id)
