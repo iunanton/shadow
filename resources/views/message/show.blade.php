@@ -9,7 +9,7 @@
     @endif
     <div class="row justify-content-center">
         <div class="col-lg-8">
-            <video-player manifest="{{ action('MessageController@getAsset', [$message->id, 'manifest.mpd']) }}" poster="{{ action('MessageController@getAsset', [$message->id, 'poster.jpg']) }}"></video-player>
+            <video-player src="{{ route('message', $message->id) }}"></video-player>
             <div>
                 <h2>{{ $message->title }}</h2>
             </div>

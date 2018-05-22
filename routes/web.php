@@ -25,8 +25,7 @@ Route::resource('/videos', 'VideoController')->names([
     'show' => 'video',
 ]);
 
-Route::get('/videos/{video}/{file}', 'VideoController@getAsset')
-    ->where('file', '(.*)');
+Route::get('/videos/{video}/{file}', 'VideoController@getAsset');
 
 Route::get('/audios', function () {
     return view('audio');
@@ -36,10 +35,11 @@ Route::get('/messages/create/{user}', [
     'as' => 'message.create',
     'uses' => 'MessageController@create'
 ]);
-Route::resource('/messages', 'MessageController', ['except' => 'create']);
+Route::resource('/messages', 'MessageController', ['except' => 'create'])->names([
+    'show' => 'message',
+]);
 
-Route::get('/messages/{message}/{file}', 'MessageController@getAsset')
-    ->where('file', '(.*)');
+Route::get('/messages/{message}/{file}', 'MessageController@getAsset');
 
 Route::get('/stats', function () {
     $videos = App\Video::orderBy('created_at', 'desc')->paginate(10);
