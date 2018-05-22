@@ -45,3 +45,5 @@ Route::get('/stats', function () {
     $videos = App\Video::orderBy('created_at', 'desc')->paginate(10);
     return view('stats')->with('videos', $videos);
 });
+
+Route::view('/ajax', 'ajax');
