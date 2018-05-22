@@ -21,7 +21,9 @@ Auth::routes();
 
 Route::resource('/profiles', 'ProfileController');
 
-Route::resource('/videos', 'VideoController');
+Route::resource('/videos', 'VideoController')->names([
+    'show' => 'video',
+]);
 
 Route::get('/videos/{video}/{file}', 'VideoController@getAsset')
     ->where('file', '(.*)');

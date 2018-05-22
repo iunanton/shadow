@@ -24,11 +24,12 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Route::pattern('file', '(.*)');
 
         parent::boot();
 
         Route::model('profile', User::class);
+
     }
 
     /**
