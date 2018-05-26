@@ -111,6 +111,7 @@ class VideoController extends Controller
      */
     public function edit(Video $video)
     {
+        $this->authorize('update', $video);
         return view('video.edit')->withVideo($video);
     }
 
@@ -123,6 +124,7 @@ class VideoController extends Controller
      */
     public function update(Request $request, Video $video)
     {
+        $this->authorize('update', $video);
         $input = array_add(
             $request->except('public'),
             'public',
@@ -139,8 +141,11 @@ class VideoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Video $video)
     {
-        //
+        $this->authorize('delete', $video);
+        $video->delete();
+        return redirect(action('VideoController@index'))
+                   ->withStatus('Video was successful deleted!');
     }
 }

@@ -80,7 +80,13 @@
                         <div class="col-sm-9">{{ $video->updated_at->toFormattedDateString() }}</div>
                     </div>
                     <a href="{{ action('VideoController@edit', $video->id) }}" class="btn btn-primary mt-2">Edit</a>
-                    <a href="{{ action('VideoController@destroy', $video->id) }}" class="btn btn-secondary mt-2">Delete</a>
+
+                    <form action="{{ action('VideoController@destroy', $video->id) }}" method="POST" style="display:inline-block;">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                        <input type="submit" class="btn btn-secondary mt-2" value="Delete">
+                    </form>
+
                 </div>
             </div>
         </div>
